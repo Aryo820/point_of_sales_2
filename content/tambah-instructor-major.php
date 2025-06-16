@@ -30,7 +30,7 @@ if (isset($_POST['id_major'])) {
     } else {
 
         $insert = mysqli_query($config, "INSERT INTO instructor_majors (id_major, id_instructor)
-         VALUES('$id_major','$id_instructor')");
+        VALUES('$id_major','$id_instructor')");
         header("location:?page=tambah-instructor-major&id=" . $id_instructor . "&tambah=berhasil");
     }
 }
@@ -81,18 +81,12 @@ $rowEdit   = mysqli_fetch_assoc($queryEdit);
                     <!-- endform edit -->
                 <?php else: ?>
                     <!-- listing table -->
-                    <div align="right">
-                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Add Instructor Major
-                        </button>
-                    </div>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Major Name</th>
                                 <th></th>
-
                             </tr>
                         </thead>
                         <tbody>

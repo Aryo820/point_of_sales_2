@@ -1,4 +1,5 @@
 <?php
+$id_roles = isset($_SESSION['ID_ROLE']) ? $_SESSION['ID_ROLE'] : '';
 $queryMainMenu = mysqli_query($config, "SELECT DISTINCT menus.* FROM menus 
 JOIN menu_roles ON menus.id = menu_roles.id_menu
 JOIN roles ON roles.id = menu_roles.id_roles
@@ -20,7 +21,7 @@ $rowMainMenu = mysqli_fetch_all($queryMainMenu, MYSQLI_ASSOC);
         <?php foreach ($rowMainMenu as $mainMenu): ?>
 
             <?php
-            $id_roles = isset($_SESSION['ID_ROLE']) ? $_SESSION['ID_ROLE'] : '';
+
             $id_menu = $mainMenu['id'];
             $querySubMenu = mysqli_query($config, "SELECT DISTINCT menus.* FROM menus 
             JOIN menu_roles ON menus.id = menu_roles.id_menu

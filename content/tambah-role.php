@@ -98,7 +98,7 @@ if (isset($_POST['save'])) {
                             <button class="btn btn-primary" type="submit" name="save">Save Change</button>
                         </div>
                     </form>
-                <?php elseif (isset($_GET['edit'])): ?>
+                    <?php else: ?>
                     <form action="" method="post">
                         <div class="mb-3">
                             <label for="">Name *</label>
@@ -106,7 +106,7 @@ if (isset($_POST['save'])) {
                                 class="form-control" name="name" placeholder="Enter your role name" required>
                         </div>
                         <div class="mb-3">
-                            <input type="submit" class="btn btn-success" name="save" value="Save">
+                            <input type="submit" class="btn btn-success" name="simpan" value="Save">
                         </div>
                     </form>
                 <?php endif ?>
