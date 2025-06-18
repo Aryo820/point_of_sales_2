@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jun 2025 pada 10.17
+-- Waktu pembuatan: 18 Jun 2025 pada 10.09
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -66,12 +66,13 @@ CREATE TABLE `menus` (
 INSERT INTO `menus` (`id`, `parent_id`, `name`, `icon`, `url`, `urutan`, `created_at`, `updated_at`) VALUES
 (1, 0, 'Dashboard', 'bi bi-grid', 'home.php', 1, '2025-06-11 04:21:50', NULL),
 (2, 0, 'Master Data', 'bi bi-menu-button-wide', '', 2, '2025-06-11 04:28:32', NULL),
-(3, 0, 'Modul', 'bi bi-book', '?page=moduls', 3, '2025-06-11 04:29:57', NULL),
-(4, 2, 'Instructor', 'bi bi-circle', 'instructor', 1, '2025-06-11 04:31:01', '2025-06-11 05:27:36'),
-(5, 2, 'Major', 'bi bi-circle', 'major', 2, '2025-06-11 04:32:09', '2025-06-11 05:28:18'),
+(3, 0, 'Transaction', 'bi bi-book', '?page=moduls', 3, '2025-06-11 04:29:57', '2025-06-18 01:55:57'),
+(4, 2, 'Product', 'bi bi-circle', 'product', 1, '2025-06-11 04:31:01', '2025-06-18 02:58:56'),
+(5, 2, 'Categories', 'bi bi-circle', 'categories', 2, '2025-06-11 04:32:09', '2025-06-18 02:59:27'),
 (6, 2, 'Menu', 'bi bi-circle', 'menu', 3, '2025-06-11 04:32:23', '2025-06-11 05:27:57'),
 (7, 2, 'Role', 'bi bi-circle', 'role', 4, '2025-06-11 04:32:43', '2025-06-11 05:27:59'),
-(9, 2, 'User', 'bi bi-circle', 'user', 8, '2025-06-12 07:03:38', NULL);
+(9, 2, 'User', 'bi bi-circle', 'user', 8, '2025-06-12 07:03:38', NULL),
+(11, 3, 'POS', 'bi bi-circle', 'pos', 1, '2025-06-18 03:25:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -92,20 +93,29 @@ CREATE TABLE `menu_roles` (
 --
 
 INSERT INTO `menu_roles` (`id`, `id_roles`, `id_menu`, `created_at`, `update_at`) VALUES
-(13, 3, 1, '2025-06-12 06:55:23', NULL),
-(14, 3, 2, '2025-06-12 06:55:23', NULL),
-(15, 3, 4, '2025-06-12 06:55:23', NULL),
-(16, 3, 5, '2025-06-12 06:55:23', NULL),
-(17, 3, 6, '2025-06-12 06:55:23', NULL),
-(18, 3, 7, '2025-06-12 06:55:23', NULL),
-(19, 3, 3, '2025-06-12 06:55:23', NULL),
 (20, 6, 3, '2025-06-12 06:55:33', NULL),
-(21, 2, 1, '2025-06-12 06:57:06', NULL),
-(22, 2, 2, '2025-06-12 06:57:06', NULL),
-(23, 2, 4, '2025-06-12 06:57:06', NULL),
-(24, 2, 5, '2025-06-12 06:57:06', NULL),
 (26, 5, 3, '2025-06-12 06:57:27', NULL),
-(28, 4, 3, '2025-06-12 07:57:14', NULL);
+(29, 4, 1, '2025-06-18 02:12:41', NULL),
+(30, 4, 2, '2025-06-18 02:12:41', NULL),
+(31, 4, 4, '2025-06-18 02:12:41', NULL),
+(32, 4, 5, '2025-06-18 02:12:41', NULL),
+(33, 4, 6, '2025-06-18 02:12:41', NULL),
+(34, 4, 7, '2025-06-18 02:12:41', NULL),
+(35, 4, 9, '2025-06-18 02:12:41', NULL),
+(36, 4, 3, '2025-06-18 02:12:41', NULL),
+(52, 2, 2, '2025-06-18 03:14:21', NULL),
+(53, 2, 4, '2025-06-18 03:14:21', NULL),
+(54, 2, 5, '2025-06-18 03:14:21', NULL),
+(55, 2, 3, '2025-06-18 03:14:21', NULL),
+(70, 3, 1, '2025-06-18 03:25:17', NULL),
+(71, 3, 2, '2025-06-18 03:25:17', NULL),
+(72, 3, 4, '2025-06-18 03:25:17', NULL),
+(73, 3, 5, '2025-06-18 03:25:17', NULL),
+(74, 3, 6, '2025-06-18 03:25:17', NULL),
+(75, 3, 7, '2025-06-18 03:25:17', NULL),
+(76, 3, 9, '2025-06-18 03:25:17', NULL),
+(77, 3, 3, '2025-06-18 03:25:17', NULL),
+(78, 3, 11, '2025-06-18 03:25:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -150,7 +160,39 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `created_at`, `update_at`) VALUES
 (2, 'Cashier', '2025-06-16 02:40:19', NULL),
-(3, 'Leader', '2025-06-16 02:43:28', NULL);
+(3, 'Leader', '2025-06-16 02:43:28', NULL),
+(4, 'Administrator', '2025-06-18 01:58:53', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `no_transaction` varchar(30) NOT NULL,
+  `sub_total` double(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaction_details`
+--
+
+CREATE TABLE `transaction_details` (
+  `id` int(11) NOT NULL,
+  `id_transaction` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty` int(5) NOT NULL,
+  `total` double(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -231,6 +273,18 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transaction_details`
+--
+ALTER TABLE `transaction_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -258,13 +312,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT untuk tabel `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu_roles`
 --
 ALTER TABLE `menu_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT untuk tabel `products`
@@ -276,7 +330,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT untuk tabel `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaction_details`
+--
+ALTER TABLE `transaction_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
