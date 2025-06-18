@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $queryDelete = mysqli_query($config, "DELETE FROM roles  WHERE id ='$id'");
+    $queryDelete = mysqli_query($config, "DELETE FROM roles WHERE id ='$id'");
     if ($queryDelete) {
         header("location:?page=role&hapus=berhasil");
     } else {

@@ -3,25 +3,25 @@ $id_user = isset($_SESSION['ID_USER']) ? $_SESSION['ID_USER'] : '';
 $id_role = isset($_SESSION['ID_ROLE']) ? $_SESSION['ID_ROLE'] : '';
 
 // 
-$rowStudent = mysqli_fetch_assoc(mysqli_query($config, "SELECT * FROM students WHERE id='$id_user'"));
-$id_major   = isset($rowStudent['id_major']) ? $rowStudent['id_major'] : '';
+// $rowStudent = mysqli_fetch_assoc(mysqli_query($config, "SELECT * FROM students WHERE id='$id_user'"));
+// $id_major   = isset($rowStudent['id_major']) ? $rowStudent['id_major'] : '';
 
-if ($id_role == 6) {
-    $where = "WHERE moduls.id_major='$id_major'";
-} elseif ($id_role == 4) {
-    $where = "WHERE moduls.id_instructor='$id_user'";
-} else {
-    $where = "";
-}
-$query = mysqli_query($config, "SELECT majors.name as major_name,
-instructors.name as instructor_name, moduls.* 
-FROM moduls
-LEFT JOIN majors ON majors.id = moduls.id_major
-LEFT JOIN instructors ON instructors.id = moduls.id_instructor
-$where
-ORDER BY moduls.id DESC");
+// if ($id_role == 6) {
+//     $where = "WHERE moduls.id_major='$id_major'";
+// } elseif ($id_role == 4) {
+//     $where = "WHERE moduls.id_instructor='$id_user'";
+// } else {
+//     $where = "";
+// }
+// $query = mysqli_query($config, "SELECT majors.name as major_name,
+// instructors.name as instructor_name, moduls.* 
+// FROM moduls
+// LEFT JOIN majors ON majors.id = moduls.id_major
+// LEFT JOIN instructors ON instructors.id = moduls.id_instructor
+// $where
+// ORDER BY moduls.id DESC");
 // 12345, 54321
-$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+// $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 ?>
 <div class="row">
     <div class="col-12">

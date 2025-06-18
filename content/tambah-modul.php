@@ -106,7 +106,6 @@ if (isset($_GET['download'])) {
                             <th>Major</th>
                             <th>:</th>
                             <td><?php echo $rowModul['major_name'] ?></td>
-
                         </tr>
                         <tr>
                             <th>Instructor</th>
