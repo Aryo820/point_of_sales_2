@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Jun 2025 pada 10.09
+-- Waktu pembuatan: 19 Jun 2025 pada 10.03
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -139,7 +139,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `id_category`, `name`, `price`, `qty`, `description`, `created_at`, `update_at`) VALUES
-(1, 2, 'Americano', 25000.00, 1, 'kopi', '2025-06-16 04:57:47', NULL);
+(1, 2, 'Americano', 25000.00, 1, 'kopi', '2025-06-16 04:57:47', NULL),
+(2, 1, 'Risol Mayo', 10000.00, 100, 'Enak', '2025-06-19 01:17:55', NULL),
+(3, 2, 'Cappucino', 20000.00, 100, '', '2025-06-19 01:18:41', NULL),
+(4, 1, 'Cimol', 15000.00, 100, '', '2025-06-19 01:20:07', NULL),
+(5, 2, 'Latte', 25000.00, 100, '', '2025-06-19 01:20:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -177,6 +181,14 @@ CREATE TABLE `transactions` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `id_user`, `no_transaction`, `sub_total`, `created_at`, `update_at`) VALUES
+(1, 0, 'TR-190625-000', 50000.00, '2025-06-19 04:52:12', NULL),
+(2, 0, 'TR-190625-001', 30000.00, '2025-06-19 06:59:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -282,7 +294,8 @@ ALTER TABLE `transactions`
 -- Indeks untuk tabel `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_trans` (`id_transaction`);
 
 --
 -- Indeks untuk tabel `users`
@@ -324,7 +337,7 @@ ALTER TABLE `menu_roles`
 -- AUTO_INCREMENT untuk tabel `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `roles`
@@ -336,7 +349,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaction_details`
@@ -359,6 +372,12 @@ ALTER TABLE `user_roles`
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `transaction_details`
+--
+ALTER TABLE `transaction_details`
+  ADD CONSTRAINT `id_trans` FOREIGN KEY (`id_transaction`) REFERENCES `transactions` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `user_roles`
