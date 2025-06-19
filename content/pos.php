@@ -4,6 +4,15 @@ LEFT JOIN users ON users.id = transactions.id_user
 ORDER BY id DESC");
 // 12345, 54321
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+if (isset($_GET['delete'])) {
+    $idDelete = $_GET['delete'];
+    $queryDelete = mysqli_query($config, "DELETE FROM transactions WHERE id = $idDelete");
+    if ($queryDelete) {
+        header("location:?page=pos");
+        exit();
+    }
+}
 ?>
 <div class="row">
     <div class="col-12">
@@ -35,7 +44,7 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                         <a href="?page=tambah-pos&print=<?php echo $row['id'] ?>"
                                             class="btn btn-primary">Print</a>
                                         <a onclick="return confirm('Are you sure wanna delete this data??')"
-                                            href="?page=tambah-pos&delete=<?php echo $row['id'] ?>"
+                                            href="?page=pos&delete=<?php echo $row['id'] ?>"
                                             class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
